@@ -15,6 +15,12 @@
                     console.log(cloudEvent);
                     var content = document.getElementById("textarea").value;
                     document.getElementById("textarea").value = cloudEvent.body + "\n\n" + content;
+                    var table = document.getElementById("table")
+                    var row = table.insertRow(1);
+                    var incoming = row.insertCell(0);
+                    var outgoing = row.insertCell(1);
+                    incoming.innerHTML = cloudEvent.incoming;
+                    incoming.innerHTML = cloudEvent.outgoing;
                 });
             });
         });
@@ -24,6 +30,12 @@
 <body>
     <h4>Messages:</h4>
     <textarea id="textarea" rows="40" style="width:100%;"></textarea>
+    <table id="table" style="width:100%;">
+        <tr>
+            <th>incoming</th>
+            <th>outgoing</th>
+        </tr>
+    </table>
 </body>
 
 </html>

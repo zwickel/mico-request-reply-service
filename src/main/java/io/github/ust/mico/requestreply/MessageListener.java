@@ -1,10 +1,13 @@
 package io.github.ust.mico.requestreply;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import io.github.ust.mico.requestreply.kafka.MicoCloudEventImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,15 +20,19 @@ public class MessageListener {
     @Autowired
     SimpMessagingTemplate websocketsTemplate;
 
+    @Autowired
+    private Service service;
+
     /**
      * Entry point for incoming messages from kafka.
      *
      * @param message
      */
     @KafkaListener(topics = "${kafka.input-topic}", groupId = "${kafka.group-id}")
-    public void receive(String message) {
-        log.debug("Received CloudEvent message: {}", message);
-        websocketsTemplate.convertAndSend("/topic/messaging-bridge", message);
+    public void receive(MicoCloudEventImpl<JsonNode> cloudEvent) {
+        log.debug("Received CloudEvent message: {}", cloudEvent);
+        // websocketsTemplate.convertAndSend("/topic/messaging-bridge", cloudEvent);
+        service.processMessage(cloudEvent);
     }
 
 }

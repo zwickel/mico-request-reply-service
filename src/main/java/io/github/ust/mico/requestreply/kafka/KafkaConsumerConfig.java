@@ -40,7 +40,7 @@ public class KafkaConsumerConfig {
                 properties.put(ErrorHandlingDeserializer2.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
                 // https://docs.spring.io/spring-kafka/docs/2.2.0.RELEASE/reference/html/_reference.html#error-handling-deserializer
                 properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer2.class);
-                properties.put(ErrorHandlingDeserializer2.VALUE_DESERIALIZER_CLASS, StringDeserializer.class);
+                properties.put(ErrorHandlingDeserializer2.VALUE_DESERIALIZER_CLASS, CloudEventDeserializer.class);
                 properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
                 properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 

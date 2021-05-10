@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Component;
 
 import io.github.ust.mico.requestreply.kafka.MicoCloudEventImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class Service {
 
   /**

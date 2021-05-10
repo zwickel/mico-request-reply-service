@@ -21,8 +21,7 @@ public class Sender {
   private String topic;
 
   public void send(MicoCloudEventImpl<JsonNode> cloudEvent) {
-    log.info("sending msg:'{}' to topic:'{}'", cloudEvent, topic);
-    kafkaTemplate.send(topic, cloudEvent);
+    send(cloudEvent, topic);
   }
 
   public void send(MicoCloudEventImpl<JsonNode> cloudEvent, String topic) {

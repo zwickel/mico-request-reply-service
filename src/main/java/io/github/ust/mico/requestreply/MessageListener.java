@@ -30,7 +30,7 @@ public class MessageListener {
      */
     @KafkaListener(topics = "${kafka.input-topic}", groupId = "${kafka.group-id}")
     public void receive(MicoCloudEventImpl<JsonNode> cloudEvent) {
-        log.debug("Received CloudEvent message: {}", cloudEvent);
+        log.info("Received CloudEvent message: {}", cloudEvent);
         // websocketsTemplate.convertAndSend("/topic/messaging-bridge", cloudEvent);
         service.processMessage(cloudEvent);
     }

@@ -13,14 +13,15 @@
             stompClient.connect({}, function (frame) {
                 stompClient.subscribe('/topic/messaging-bridge', function (cloudEvent) {
                     console.log(cloudEvent);
+                    // Textarea part.
                     var content = document.getElementById("textarea").value;
                     document.getElementById("textarea").value = cloudEvent.body + "\n\n" + content;
+                    // Table part.
+                    var cloudEventJson = JSON.parse(cloudEvent.body);
                     var table = document.getElementById("table")
                     var row = table.insertRow(1);
-                    var incoming = row.insertCell(0);
-                    var outgoing = row.insertCell(1);
-                    incoming.innerHTML = cloudEvent.incoming;
-                    incoming.innerHTML = cloudEvent.outgoing;
+                    row.insertCell(1).innerHTML = cloudEventJson.outgoing;
+                    row.insertCell(0).innerHTML = cloudEventJson.incoming;
                 });
             });
         });
